@@ -6,26 +6,73 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>📚 DueDate Dashboard</h1>
-      <button id="addBtn">+ Add Assignment</button>
-
-      <!-- This is where new tasks will appear -->
-      <div id="assignmentList"></div>
-    </div>
-
-    <!-- Simple Pop-up Window Box -->
-    <div id="modal" class="modal hidden">
-      <div class="modal-content">
-        <h2>Add Assignment</h2>
-        <input type="text" id="title" placeholder="Assignment Title" />
-        <input type="text" id="course" placeholder="Course Name" />
-        <input type="date" id="dueDate" />
-        <div class="actions">
-          <button id="saveBtn">Save</button>
-          <button id="cancelBtn">Cancel</button>
+    <div class="page-shell">
+      <header class="page-header">
+        <div>
+          <p class="eyebrow">Due Date Dashboard</p>
+          <h1>Stay on top of your deadlines</h1>
         </div>
-      </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="panel panel-dashboard">
+          <div class="panel-header">
+            <div>
+              <h2 class="panel-title">Upcoming Assignments</h2>
+              <p class="panel-subtitle">Quickly review deadlines and status.</p>
+            </div>
+            <button id="addBtn" class="btn btn-primary">
+              + Add Assignment
+            </button>
+          </div>
+
+          <div
+            id="assignmentList"
+            class="assignment-list"
+            aria-live="polite"
+          ></div>
+        </section>
+
+        <section class="panel panel-form">
+          <div class="panel-header">
+            <h2 class="panel-title">Add Assignment</h2>
+          </div>
+
+          <form id="assignmentForm" class="form-layout">
+            <label>
+              Title
+              <input
+                type="text"
+                id="title"
+                placeholder="Enter assignment title"
+              />
+            </label>
+
+            <label>
+              Course
+              <input type="text" id="course" placeholder="Enter course name" />
+            </label>
+
+            <label>
+              Due Date
+              <input type="date" id="dueDate" />
+            </label>
+
+            <label>
+              Priority
+              <select id="priority">
+                <option value="high">High priority</option>
+                <option value="medium" selected>Medium priority</option>
+                <option value="low">Low priority</option>
+              </select>
+            </label>
+
+            <button type="submit" id="saveBtn" class="btn btn-primary btn-full">
+              Add Assignment
+            </button>
+          </form>
+        </section>
+      </main>
     </div>
 
     <script src="script.js"></script>
