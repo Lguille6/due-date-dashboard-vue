@@ -1,0 +1,118 @@
+/* Basic Page Layout */
+body {
+  background-color: #f0f2f5;
+  font-family: Arial, sans-serif;
+  padding: 30px;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* Button Styling */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#addBtn {
+  background-color: #007bff;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* 1. ANIMATION: New cards fade and slide up smoothly */
+.card {
+  background: white;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid #007bff;
+
+  /* Trigger the entry animation */
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Pop-up Background Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 2. ANIMATION: Modal pops open with a smooth scale-up zoom */
+.modal-content {
+  background: white;
+  padding: 25px;
+  border-radius: 10px;
+  width: 300px;
+  animation: popUp 0.3s ease-out;
+}
+
+@keyframes popUp {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Input Fields */
+input {
+  width: 100%;
+  padding: 8px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+#cancelBtn {
+  background-color: #6c757d;
+  color: white;
+}
+#saveBtn {
+  background-color: #28a745;
+  color: white;
+}
+
+/* Simple toggle class to hide elements */
+.hidden {
+  display: none !important;
+}

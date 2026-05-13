@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>DueDate Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 DueDate Dashboard</h1>
+      <button id="addBtn">+ Add Assignment</button>
+
+      <!-- This is where new tasks will appear -->
+      <div id="assignmentList"></div>
+    </div>
+
+    <!-- Simple Pop-up Window Box -->
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <h2>Add Assignment</h2>
+        <input type="text" id="title" placeholder="Assignment Title" />
+        <input type="text" id="course" placeholder="Course Name" />
+        <input type="date" id="dueDate" />
+        <div class="actions">
+          <button id="saveBtn">Save</button>
+          <button id="cancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
