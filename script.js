@@ -1,68 +1,78 @@
-// Get all HTML elements
 const addBtn = document.getElementById("addBtn");
-const cancelBtn = document.getElementById("cancelBtn");
 const saveBtn = document.getElementById("saveBtn");
-const modal = document.getElementById("modal");
 const assignmentList = document.getElementById("assignmentList");
+const assignmentForm = document.getElementById("assignmentForm");
 
 const titleInput = document.getElementById("title");
 const courseInput = document.getElementById("course");
 const dueDateInput = document.getElementById("dueDate");
+const priorityInput = document.getElementById("priority");
 
-// Show modal when clicking "+ Add Assignment"
+assignmentForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  addAssignment();
+});
+
 addBtn.addEventListener("click", () => {
-  modal.classList.remove("hidden");
+  titleInput.focus();
 });
 
-// Hide modal when clicking "Cancel"
-cancelBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-  clearForm();
-});
-
-// Clear input boxes
-function clearForm() {
-  titleInput.value = "";
-  courseInput.value = "";
-  dueDateInput.value = "";
-}
-
-// Add card when clicking "Save"
-saveBtn.addEventListener("click", () => {
-  // Get values from inputs
-  const title = titleInput.value;
-  const course = courseInput.value;
+function addAssignment() {
+  const title = titleInput.value.trim();
+  const course = courseInput.value.trim();
   const dueDate = dueDateInput.value;
+  const priority = priorityInput.value;
 
-  // Validation check
-  if (title === "" || course === "" || dueDate === "") {
-    alert("Please fill out all fields!");
+  if (!title || !course || !dueDate) {
+    alert("Please fill out all assignment fields.");
     return;
   }
 
-  // Create a new div element for the card
-  const card = document.createElement("div");
-  card.classList.add("card");
-
-  // Insert text and delete button into the card
+  const card = document.createElement("article");
+  card.className = `assignment-card priority-${priority}`;
   card.innerHTML = `
-        <div>
-            <h3>${title}</h3>
-            <p>${course} - Due: ${dueDate}</p>
-        </div>
-        <button class="delete-btn">Delete</button>
-    `;
+    <header>
+      <div>
+        <h3>${title}</h3>
+        <p class="assignment-meta">
+          <span class="assignment-badges">
+            <span class="status-dot"></span>
+            ${priority.charAt(0).toUpperCase() + priority.slice(1)} priority
+          </span>
+          <span>Due: ${formatDate(dueDate)}</span>
+        </p>
+      </div>
+      <div class="card-actions">
+        <button type="button" class="small-btn btn-secondary">Mark Complete</button>
+        <button type="button" class="small-btn btn-danger">Delete</button>
+      </div>
+    </header>
+  `;
 
-  // Make the delete button remove its own card
-  const deleteBtn = card.querySelector(".delete-btn");
-  deleteBtn.addEventListener("click", () => {
-    card.remove();
+  const deleteBtn = card.querySelector(".btn-danger");
+  deleteBtn.addEventListener("click", () => card.remove());
+
+  const completeBtn = card.querySelector(".btn-secondary");
+  completeBtn.addEventListener("click", () => {
+    card.classList.toggle("completed");
+    completeBtn.textContent = card.classList.contains("completed")
+      ? "Completed"
+      : "Mark Complete";
   });
 
-  // Put the card onto the screen list
-  assignmentList.appendChild(card);
+  assignmentList.prepend(card);
+  resetForm();
+}
 
-  // Close window and reset form fields
-  modal.classList.add("hidden");
-  clearForm();
-});
+function resetForm() {
+  titleInput.value = "";
+  courseInput.value = "";
+  dueDateInput.value = "";
+  priorityInput.value = "medium";
+  titleInput.focus();
+}
+
+function formatDate(value) {
+  const options = { month: "short", day: "numeric" };
+  return new Date(value).toLocaleDateString(undefined, options);
+}
